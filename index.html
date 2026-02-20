@@ -2,89 +2,185 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Académie Python – Cours Complet Ultime (Version Longue)</title>
+  <title>Académie Python – Cours complet</title>
 
   <style>
     * { box-sizing: border-box; }
 
+    :root {
+      --bg: #020617;
+      --bg-elevated: #020617;
+      --border: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-soft: #0ea5e9;
+      --danger: #f97373;
+      --success: #22c55e;
+      --code-bg: #020617;
+    }
+
     body {
       margin: 0;
-      font-family: "Segoe UI", system-ui, sans-serif;
-      background: #eef6ff;
-      color: #0f172a;
-      overflow-x: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000 100%);
+      color: var(--text);
     }
 
     header {
       position: sticky;
       top: 0;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #cbd5e1;
-      padding: 12px 20px;
-      z-index: 10;
+      z-index: 20;
+      background: rgba(2, 6, 23, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
 
     .header-inner {
       max-width: 1200px;
       margin: 0 auto;
+      padding: 10px 16px 8px;
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .brand-title {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: #0f172a;
+    .brand-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .brand-sub {
+    .brand-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-subtitle {
       font-size: 0.9rem;
-      color: #475569;
+      color: var(--muted);
+    }
+
+    .level-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      font-size: 0.75rem;
+    }
+
+    .level-badge {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      color: var(--muted);
     }
 
     .nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
+      gap: 6px;
+      margin-top: 4px;
     }
 
     .nav button {
-      border: 1px solid #64748b;
-      background: white;
-      color: #0f172a;
       border-radius: 999px;
-      padding: 6px 14px;
+      border: 1px solid #475569;
+      background: #020617;
+      color: var(--text);
+      padding: 5px 12px;
+      font-size: 0.85rem;
       cursor: pointer;
-      font-size: 0.9rem;
       transition: 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav button span {
+      font-size: 0.7rem;
+      color: var(--muted);
     }
 
     .nav button:hover {
-      background: #e2e8f0;
+      background: #1e293b;
     }
 
     .nav button.active {
-      background: #38bdf8;
-      color: white;
-      border-color: #38bdf8;
+      background: var(--accent);
+      color: #0f172a;
+      border-color: var(--accent);
     }
 
     main {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px 20px 40px;
+      padding: 18px 16px 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(260px, 0.9fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .sidebar {
+      min-width: 0;
+      position: sticky;
+      top: 80px;
+      align-self: flex-start;
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 14px 14px 18px;
+    }
+
+    .sidebar h3 {
+      margin-top: 0;
+      font-size: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+
+    .sidebar p,
+    .sidebar li {
+      font-size: 0.85rem;
+      color: #cbd5f5;
+    }
+
+    .sidebar ul {
+      padding-left: 18px;
+      margin: 6px 0 10px;
+    }
+
+    .sidebar-section {
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #1e293b;
+    }
+
+    .sidebar-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
 
     section {
       display: none;
-      background: white;
-      padding: 24px 26px;
-      border-radius: 14px;
-      border: 1px solid #cbd5e1;
-      margin-top: 20px;
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 18px 20px 22px;
+      margin-top: 16px;
     }
 
     section.active {
@@ -93,447 +189,1290 @@
 
     h2 {
       margin-top: 0;
-      border-bottom: 2px solid #94a3b8;
+      border-bottom: 2px solid var(--border);
       padding-bottom: 6px;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    h2 .chapter-tag {
+      font-size: 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      color: var(--muted);
     }
 
     h3 {
-      margin-top: 24px;
-      font-size: 1.2rem;
-      color: #0f172a;
+      margin-top: 18px;
+      font-size: 1.05rem;
     }
 
     h4 {
-      margin-top: 16px;
-      font-size: 1rem;
-      color: #1e293b;
-    }
-
-    p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: #1e293b;
-    }
-
-    ul {
-      padding-left: 22px;
+      margin-top: 14px;
       font-size: 0.95rem;
     }
 
-    li {
-      margin-bottom: 6px;
+    p, li {
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
 
     pre {
-      background: #0f172a;
-      color: #f1f5f9;
-      padding: 14px;
-      border-radius: 8px;
+      background: var(--code-bg);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
       overflow-x: auto;
-      font-size: 0.95rem;
-      margin-top: 10px;
-      margin-bottom: 10px;
+      border: 1px solid var(--border);
     }
 
     code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      background: #e2e8f0;
-      padding: 2px 5px;
+      background: var(--code-bg);
+      padding: 1px 4px;
       border-radius: 4px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      border: 1px solid var(--border);
     }
 
     .explain {
-      background: #f1f5f9;
-      border-left: 4px solid #38bdf8;
-      padding: 10px 14px;
-      margin: 10px 0 14px;
-      border-radius: 6px;
-      font-size: 0.95rem;
-    }
-
-    .note {
+      background: var(--bg-elevated);
+      border-left: 4px solid var(--accent);
+      padding: 8px 10px;
+      margin: 8px 0 12px;
+      border-radius: 4px;
       font-size: 0.9rem;
-      color: #64748b;
     }
 
-    .columns {
+    .tip {
+      background: #022c22;
+      border-left: 4px solid var(--success);
+      padding: 8px 10px;
+      margin: 8px 0 12px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    .warning {
+      background: #450a0a;
+      border-left: 4px solid var(--danger);
+      padding: 8px 10px;
+      margin: 8px 0 12px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    .table-like {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px;
+      font-size: 0.9rem;
+    }
+
+    .table-like th,
+    .table-like td {
+      border: 1px solid var(--border);
+      padding: 6px 8px;
+      text-align: left;
+    }
+
+    .table-like th {
+      background: #020617;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      background: #020617;
+      color: var(--text);
+      margin-right: 4px;
+    }
+
+    .exercise {
+      background: var(--bg-elevated);
+      border-radius: 8px;
+      border: 1px dashed #334155;
+      padding: 10px 12px;
+      margin: 10px 0 14px;
+    }
+
+    .exercise-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .exercise-level {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      border: 1px solid var(--border);
+      margin-right: 4px;
+      color: #cbd5f5;
+    }
+
+    .chapter-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .progress {
+      height: 6px;
+      border-radius: 999px;
+      background: #020617;
+      overflow: hidden;
+      margin: 6px 0 10px;
+      border: 1px solid var(--border);
+    }
+
+    .progress-inner {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--success));
+      transition: width 0.3s ease;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin: 6px 0 10px;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #020617;
+      color: #cbd5f5;
+    }
+
+    .mini-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+
+    .two-cols {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
 
-    @media (max-width: 900px) {
-      .columns {
+    @media (max-width: 700px) {
+      .two-cols {
         grid-template-columns: 1fr;
       }
+    }
+
+    .checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .checklist li::before {
+      content: "• ";
+      color: var(--accent);
+    }
+
+    footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 16px 24px;
+      font-size: 0.8rem;
+      color: #64748b;
     }
   </style>
 </head>
 
 <body>
-
   <header>
     <div class="header-inner">
-      <div class="brand-title">Académie Python – Cours Complet Ultime</div>
-      <div class="brand-sub">Un seul fichier. Tout Python. De 0 à expert.</div>
+      <div class="brand-row">
+        <div>
+          <div class="brand-title">Académie Python</div>
+          <div class="brand-subtitle">Cours complet, progressif, en un seul fichier HTML.</div>
+        </div>
+        <div class="level-badges">
+          <span class="level-badge">Débutant</span>
+          <span class="level-badge">Intermédiaire</span>
+          <span class="level-badge">Projets</span>
+        </div>
+      </div>
 
       <div class="nav">
-        <button class="active" data-target="accueil">Accueil</button>
-        <button data-target="bases">Bases</button>
-        <button data-target="conditions">Conditions</button>
-        <button data-target="boucles">Boucles</button>
-        <button data-target="listes">Listes</button>
-        <button data-target="fonctions">Fonctions</button>
-        <button data-target="modules">Modules</button>
-        <button data-target="erreurs">Erreurs</button>
-        <button data-target="projets">Projets</button>
-        <button data-target="exercices">Exercices</button>
-        <button data-target="algos">Algorithmes</button>
-        <button data-target="maths">Maths utiles</button>
-        <button data-target="glossaire">Glossaire</button>
-        <button data-target="annexes">Annexes</button>
+        <button class="active" data-target="accueil">Accueil <span>0</span></button>
+        <button data-target="bases">Bases <span>1</span></button>
+        <button data-target="types">Types & chaînes <span>2</span></button>
+        <button data-target="conditions">Conditions <span>3</span></button>
+        <button data-target="boucles">Boucles <span>4</span></button>
+        <button data-target="listes">Listes & 2D <span>5</span></button>
+        <button data-target="fonctions">Fonctions <span>6</span></button>
+        <button data-target="modules">Modules <span>7</span></button>
+        <button data-target="fichiers">Fichiers & erreurs <span>8</span></button>
+        <button data-target="objets">Objets <span>9</span></button>
+        <button data-target="projets">Projets <span>10</span></button>
       </div>
     </div>
   </header>
 
   <main>
+    <div class="content">
+      <!-- ACCUEIL -->
+      <section id="accueil" class="active">
+        <h2>
+          Bienvenue à l’Académie Python
+          <span class="chapter-tag">Introduction</span>
+        </h2>
+        <div class="chapter-meta">
+          Objectif : comprendre comment utiliser ce cours et installer un environnement Python.
+        </div>
 
-    <!-- ACCUEIL -->
-    <section id="accueil" class="active">
-      <h2>Bienvenue dans l’Académie Python</h2>
-      <p>
-        Ce fichier HTML contient un **cours complet**, massif, structuré, pensé pour apprendre Python depuis zéro.
-        Il est conçu pour être lu comme un **livre numérique**, mais dans un seul fichier.
-      </p>
+        <div class="progress"><div class="progress-inner" data-progress="10"></div></div>
 
-      <p>
-        Tu y trouveras :
-      </p>
+        <h3>1. Ce que tu vas apprendre ici</h3>
+        <div class="two-cols">
+          <div>
+            <ul class="checklist">
+              <li>Les bases de Python (print, variables, types, input)</li>
+              <li>Les conditions, boucles, listes, fonctions</li>
+              <li>Les modules, fichiers, erreurs</li>
+              <li>Une introduction simple aux objets</li>
+              <li>Des mini‑projets complets</li>
+            </ul>
+          </div>
+          <div>
+            <ul class="checklist">
+              <li>Lire et comprendre du code</li>
+              <li>Écrire ton propre code</li>
+              <li>Corriger des erreurs fréquentes</li>
+              <li>Structurer un petit projet</li>
+            </ul>
+          </div>
+        </div>
 
-      <ul>
-        <li>Les bases absolues (variables, print, input)</li>
-        <li>Les conditions (if, elif, else)</li>
-        <li>Les boucles (for, while)</li>
-        <li>Les listes, tableaux, grilles 2D</li>
-        <li>Les fonctions, paramètres, return</li>
-        <li>Les modules (math, random, etc.)</li>
-        <li>Les erreurs Python et comment les comprendre</li>
-        <li>Des mini‑projets complets</li>
-        <li>Des exercices guidés</li>
-        <li>Des algorithmes classiques</li>
-        <li>Des maths utiles pour programmer</li>
-        <li>Un glossaire Python complet</li>
-        <li>Des annexes avec des centaines d’exemples</li>
-      </ul>
+        <h3>2. Installer Python (résumé rapide)</h3>
+        <p>Tu peux utiliser :</p>
+        <ul>
+          <li>Python officiel (python.org) + IDLE</li>
+          <li>Thonny (environnement simple pour débuter)</li>
+          <li>VS Code + extension Python</li>
+          <li>Un site en ligne (Replit, etc.) si tu ne peux rien installer</li>
+        </ul>
 
-      <p class="note">
-        Clique sur un bouton du menu pour naviguer.
-      </p>
-    </section>
+        <div class="tip">
+          L’important n’est pas l’outil, mais le fait de pouvoir exécuter du code Python et voir le résultat.
+        </div>
 
-    <!-- BASES -->
-    <section id="bases">
-      <h2>Bases de Python</h2>
+        <h3>3. Méthode de travail recommandée</h3>
+        <ol>
+          <li>Lis un paragraphe.</li>
+          <li>Recopie le code dans ton éditeur.</li>
+          <li>Exécute, observe, modifie.</li>
+          <li>Fais les exercices sans regarder la correction.</li>
+          <li>Compare avec la correction, corrige ton code.</li>
+        </ol>
 
-      <h3>1. Qu’est‑ce qu’un programme Python ?</h3>
-      <p>
-        Un programme Python est un fichier texte contenant des instructions.
-        Python lit ces instructions de haut en bas et les exécute.
-      </p>
+        <h3>4. Structure du cours</h3>
+        <ul>
+          <li><strong>Bases :</strong> print, variables, input, conversions</li>
+          <li><strong>Types & chaînes :</strong> int, float, bool, str, opérations sur le texte</li>
+          <li><strong>Conditions :</strong> if, elif, else, comparaisons, logique</li>
+          <li><strong>Boucles :</strong> for, while, range, boucles imbriquées</li>
+          <li><strong>Listes & 2D :</strong> tableaux, parcours, grilles</li>
+          <li><strong>Fonctions :</strong> paramètres, return, réutilisation</li>
+          <li><strong>Modules :</strong> math, random, time</li>
+          <li><strong>Fichiers & erreurs :</strong> lire/écrire, try/except</li>
+          <li><strong>Objets :</strong> classes, attributs, méthodes (introduction)</li>
+          <li><strong>Projets :</strong> programmes complets</li>
+        </ul>
+      </section>
 
-      <h3>2. Premier programme</h3>
-      <pre>print("Bonjour, Python !")</pre>
+      <!-- BASES -->
+      <section id="bases">
+        <h2>
+          Bases de Python
+          <span class="chapter-tag">Chapitre 1</span>
+        </h2>
+        <div class="chapter-meta">
+          Objectifs : afficher du texte, utiliser des variables, lire au clavier, convertir des valeurs.
+        </div>
 
-      <div class="explain">
-        <strong>print</strong> : fonction d’affichage  
-        <strong>( )</strong> : parenthèses  
-        <strong>" "</strong> : chaîne de caractères  
-      </div>
+        <div class="progress"><div class="progress-inner" data-progress="20"></div></div>
 
-      <h3>3. Variables</h3>
-      <pre>
-nom = "Durand"
+        <h3>1. Afficher du texte avec print()</h3>
+        <pre>print("Bonjour !")
+print("Bienvenue dans l'Académie Python")</pre>
+
+        <div class="explain">
+          <strong>print()</strong> est une fonction intégrée de Python qui affiche ce qu’on lui donne entre parenthèses.
+          Le texte doit être entouré de guillemets <code>" "</code> ou <code>' '</code>.
+        </div>
+
+        <h4>Erreurs fréquentes</h4>
+        <div class="warning">
+          <ul>
+            <li>Oublier une parenthèse : <code>print("Salut"</code> → <em>SyntaxError</em></li>
+            <li>Oublier les guillemets : <code>print(Salut)</code> → <em>NameError</em></li>
+          </ul>
+        </div>
+
+        <h3>2. Variables : stocker des informations</h3>
+        <pre>nom = "Samir"
 age = 17
 moyenne = 13.5
-admis = True
-      </pre>
+admis = True</pre>
 
-      <div class="explain">
-        <strong>=</strong> affecte une valeur  
-        <strong>str</strong> : texte  
-        <strong>int</strong> : entier  
-        <strong>float</strong> : nombre à virgule  
-        <strong>bool</strong> : vrai/faux  
-      </div>
+        <div class="explain">
+          Une variable est un <strong>nom</strong> qui pointe vers une <strong>valeur</strong>.
+          On utilise le signe <code>=</code> pour faire une affectation (mettre une valeur dans une variable).
+        </div>
 
-      <h3>4. Saisie clavier</h3>
-      <pre>
-prenom = input("Votre prénom : ")
-print("Bonjour", prenom)
-      </pre>
+        <table class="table-like">
+          <tr><th>Nom</th><th>Valeur</th><th>Type</th></tr>
+          <tr><td><code>nom</code></td><td><code>"Samir"</code></td><td>str (texte)</td></tr>
+          <tr><td><code>age</code></td><td><code>17</code></td><td>int (entier)</td></tr>
+          <tr><td><code>moyenne</code></td><td><code>13.5</code></td><td>float (décimal)</td></tr>
+          <tr><td><code>admis</code></td><td><code>True</code></td><td>bool (vrai/faux)</td></tr>
+        </table>
 
-      <h3>5. Conversion</h3>
-      <pre>
-texte = input("Entrez un nombre : ")
+        <h4>Règles pour les noms de variables</h4>
+        <ul>
+          <li>Pas d’espace : utiliser <code>_</code> → <code>note_math</code></li>
+          <li>Pas de caractères spéciaux (%, -, ?, …)</li>
+          <li>Ne pas commencer par un chiffre</li>
+          <li>Python distingue majuscules/minuscules : <code>age</code> ≠ <code>Age</code></li>
+        </ul>
+
+        <h3>3. Saisie clavier avec input()</h3>
+        <pre>prenom = input("Votre prénom : ")
+print("Bonjour", prenom)</pre>
+
+        <div class="explain">
+          <strong>input()</strong> affiche un message, attend que l’utilisateur tape quelque chose, puis renvoie ce texte.
+          Le résultat est toujours une <strong>chaîne de caractères</strong> (type <code>str</code>), même si l’utilisateur tape un nombre.
+        </div>
+
+        <h3>4. Conversion en entier avec int()</h3>
+        <pre>texte = input("Entrez un nombre : ")
 n = int(texte)
-print(n + 10)
-      </pre>
+print("n + 10 =", n + 10)</pre>
 
-      <h3>6. Types de base</h3>
-      <ul>
-        <li><code>int</code> : entier</li>
-        <li><code>float</code> : nombre décimal</li>
-        <li><code>str</code> : texte</li>
-        <li><code>bool</code> : True / False</li>
-      </ul>
+        <div class="warning">
+          Si l’utilisateur tape autre chose qu’un nombre entier (par exemple "abc"), <code>int()</code> provoquera une erreur
+          <em>ValueError</em>. On verra plus tard comment gérer ça proprement.
+        </div>
 
-      <h3>7. Opérateurs</h3>
-      <pre>
-+   addition
--   soustraction
-*   multiplication
-/   division
-//  division entière
-%   modulo
-**  puissance
-      </pre>
+        <h3>5. Résumé des notions</h3>
+        <ul>
+          <li><code>print()</code> : afficher des choses</li>
+          <li><code>variable = valeur</code> : stocker une information</li>
+          <li><code>input()</code> : lire au clavier (toujours du texte)</li>
+          <li><code>int()</code> : convertir du texte en entier</li>
+        </ul>
 
-      <h3>8. Expressions</h3>
-      <pre>
-a = 5
+        <h3>6. Exercices</h3>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 1 – Bonjour toi</div>
+          <div class="exercise-level"><span class="tag">Débutant</span>Utilise <code>input()</code> et <code>print()</code>.</div>
+          <p>Demande le prénom de l’utilisateur et affiche :</p>
+          <pre>Bonjour &lt;prénom&gt; !</pre>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 2 – Calcul simple</div>
+          <div class="exercise-level"><span class="tag">Débutant</span>Conversions + opérations.</div>
+          <p>Demande un nombre et affiche :</p>
+          <ul>
+            <li>son double</li>
+            <li>son triple</li>
+            <li>son carré</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 3 – Convertisseur d’âge</div>
+          <div class="exercise-level"><span class="tag">Débutant</span>Variables + calculs.</div>
+          <p>Demande l’âge de l’utilisateur et affiche :</p>
+          <pre>Tu as &lt;âge&gt; ans, donc &lt;âge*12&gt; mois.</pre>
+        </div>
+
+        <h3>7. Corrections</h3>
+
+        <h4>Correction exercice 1</h4>
+        <pre>prenom = input("Votre prénom : ")
+print("Bonjour", prenom + " !")</pre>
+
+        <h4>Correction exercice 2</h4>
+        <pre>n = int(input("Nombre : "))
+print("Double :", n * 2)
+print("Triple :", n * 3)
+print("Carré :", n * n)</pre>
+
+        <h4>Correction exercice 3</h4>
+        <pre>age = int(input("Âge : "))
+mois = age * 12
+print("Tu as", mois, "mois.")</pre>
+      </section>
+
+      <!-- TYPES & CHAINES -->
+      <section id="types">
+        <h2>
+          Types de base & chaînes de caractères
+          <span class="chapter-tag">Chapitre 2</span>
+        </h2>
+        <div class="chapter-meta">
+          Objectifs : comprendre int, float, bool, str, et manipuler du texte.
+        </div>
+
+        <div class="progress"><div class="progress-inner" data-progress="30"></div></div>
+
+        <h3>1. Les principaux types</h3>
+
+        <table class="table-like">
+          <tr><th>Type</th><th>Exemples</th><th>Description</th></tr>
+          <tr><td><code>int</code></td><td><code>0, 12, -5, 2024</code></td><td>Entiers</td></tr>
+          <tr><td><code>float</code></td><td><code>3.14, -0.5, 2.0</code></td><td>Décimaux</td></tr>
+          <tr><td><code>bool</code></td><td><code>True, False</code></td><td>Vrai / Faux</td></tr>
+          <tr><td><code>str</code></td><td><code>"Bonjour", "42"</code></td><td>Texte</td></tr>
+        </table>
+
+        <pre>a = 10          # int
+b = 3.5         # float
+c = True        # bool
+d = "Python"    # str
+
+print(type(a))
+print(type(d))</pre>
+
+        <h3>2. Opérations sur les nombres</h3>
+        <pre>a = 7
 b = 2
-c = a * b + 3
-print(c)
-      </pre>
 
-      <h3>9. Commentaires</h3>
-      <pre>
-# Ceci est un commentaire
-print("Bonjour")  # commentaire en fin de ligne
-      </pre>
+print(a + b)   # addition
+print(a - b)   # soustraction
+print(a * b)   # multiplication
+print(a / b)   # division (float)
+print(a // b)  # division entière
+print(a % b)   # reste de la division
+print(a ** b)  # puissance</pre>
 
-      <h3>10. Exercices (bases)</h3>
-      <ul>
-        <li>Afficher ton prénom</li>
-        <li>Afficher ton âge</li>
-        <li>Demander un nombre et afficher son double</li>
-        <li>Demander deux nombres et afficher leur somme</li>
-      </ul>
-    </section>
+        <div class="tip">
+          <strong>Astuce :</strong> <code>%</code> (modulo) est très utile pour savoir si un nombre est pair ou impair.
+        </div>
 
-    <!-- CONDITIONS -->
-    <section id="conditions">
-      <h2>Conditions</h2>
+        <h3>3. Chaînes de caractères (str)</h3>
+        <pre>texte = "Python"
+print(texte)
+print(len(texte))      # longueur
+print(texte[0])        # premier caractère
+print(texte[-1])       # dernier caractère</pre>
 
-      <h3>1. Structure</h3>
-      <pre>
-if condition:
-    ...
+        <div class="explain">
+          Une chaîne est une suite de caractères. On peut accéder à chaque caractère avec des indices (0, 1, 2, …).
+        </div>
+
+        <h3>4. Concaténation et répétition</h3>
+        <pre>prenom = "Léa"
+message = "Bonjour " + prenom
+print(message)
+
+print("Ha" * 3)   # "HaHaHa"</pre>
+
+        <h3>5. Méthodes utiles sur les chaînes</h3>
+        <pre>texte = "  bonJour le Monde  "
+
+print(texte.lower())   # tout en minuscules
+print(texte.upper())   # tout en majuscules
+print(texte.strip())   # enlève les espaces au début/fin
+print(texte.replace("Monde", "Python"))</pre>
+
+        <h3>6. Exercices</h3>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 1 – Analyse de texte</div>
+          <div class="exercise-level"><span class="tag">Débutant</span>Chaînes + len().</div>
+          <p>Demande une phrase à l’utilisateur et affiche :</p>
+          <ul>
+            <li>La phrase</li>
+            <li>Sa longueur (nombre de caractères)</li>
+            <li>Son premier et son dernier caractère</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 2 – Formateur de nom</div>
+          <div class="exercise-level"><span class="tag">Débutant</span>upper(), lower().</div>
+          <p>Demande un prénom et un nom, puis affiche :</p>
+          <pre>Nom complet : NOM Prénom</pre>
+          <p>(nom en majuscules, prénom avec seulement la première lettre en majuscule).</p>
+        </div>
+
+        <h3>7. Corrections</h3>
+
+        <h4>Correction exercice 1</h4>
+        <pre>phrase = input("Entrez une phrase : ")
+
+print("Phrase :", phrase)
+print("Longueur :", len(phrase))
+
+if len(phrase) &gt; 0:
+    print("Premier caractère :", phrase[0])
+    print("Dernier caractère :", phrase[-1])</pre>
+
+        <h4>Correction exercice 2</h4>
+        <pre>prenom = input("Prénom : ")
+nom = input("Nom : ")
+
+prenom_formate = prenom.capitalize()
+nom_formate = nom.upper()
+
+print("Nom complet :", nom_formate, prenom_formate)</pre>
+      </section>
+
+      <!-- CONDITIONS -->
+      <section id="conditions">
+        <h2>
+          Conditions
+          <span class="chapter-tag">Chapitre 3</span>
+        </h2>
+        <div class="chapter-meta">
+          Objectifs : if, elif, else, comparaisons, logique, cas pratiques.
+        </div>
+
+        <div class="progress"><div class="progress-inner" data-progress="40"></div></div>
+
+        <h3>1. Structure générale</h3>
+        <pre>if condition:
+    # bloc si vrai
 elif autre_condition:
-    ...
+    # bloc sinon si
 else:
-    ...
-      </pre>
+    # bloc sinon</pre>
 
-      <h3>2. Comparaisons</h3>
-      <pre>
-==  égal
-!=  différent
->   strictement supérieur
-<   strictement inférieur
->=  supérieur ou égal
-<=  inférieur ou égal
-      </pre>
+        <h3>2. Opérateurs de comparaison</h3>
+        <table class="table-like">
+          <tr><th>Opérateur</th><th>Signification</th><th>Exemple</th></tr>
+          <tr><td><code>==</code></td><td>égal à</td><td><code>a == 5</code></td></tr>
+          <tr><td><code>!=</code></td><td>différent de</td><td><code>a != 5</code></td></tr>
+          <tr><td><code>&lt;</code>, <code>&gt;</code></td><td>strictement inférieur / supérieur</td><td><code>a &lt; 10</code></td></tr>
+          <tr><td><code>&lt;=</code>, <code>&gt;=</code></td><td>inférieur ou égal / supérieur ou égal</td><td><code>a &gt;= 0</code></td></tr>
+        </table>
 
-      <h3>3. Positif / négatif</h3>
-      <pre>
-n = int(input("Entrez un entier : "))
+        <h3>3. Pair ou impair</h3>
+        <pre>n = int(input("Entrez un entier : "))
 
-if n > 0:
-    print("positif")
-elif n < 0:
-    print("négatif")
-else:
-    print("nul")
-      </pre>
-
-      <h3>4. Pair / impair</h3>
-      <pre>
 if n % 2 == 0:
-    print("pair")
+    print("Le nombre est pair.")
 else:
-    print("impair")
-      </pre>
+    print("Le nombre est impair.")</pre>
 
-      <h3>5. Intervalle</h3>
-      <pre>
-if 10 <= n <= 20:
-    print("dans l'intervalle")
-      </pre>
+        <h3>4. Combiner des conditions avec and / or / not</h3>
+        <pre>age = int(input("Âge : "))
 
-      <h3>6. Conditions combinées</h3>
-      <pre>
-if age >= 18 and age <= 25:
-    print("Jeune adulte")
-      </pre>
+if age &gt;= 18 and age &lt;= 25:
+    print("Réduction jeune adulte")
+elif age &lt; 18:
+    print("Tarif enfant")
+else:
+    print("Tarif normal")</pre>
 
-      <h3>7. Exercices (conditions)</h3>
-      <ul>
-        <li>Tester si un nombre est multiple de 3</li>
-        <li>Tester si un nombre est dans [5 ; 15]</li>
-        <li>Tester si un mot fait plus de 5 lettres</li>
-      </ul>
-    </section>
+        <h3>5. Exercices</h3>
 
-    <!-- BOUCLES -->
-    <section id="boucles">
-      <h2>Boucles</h2>
+        <div class="exercise">
+          <div class="exercise-title">Exercice 1 – Note et mention</div>
+          <div class="exercise-level"><span class="tag">Débutant</span>Conditions simples.</div>
+          <p>Demande une note sur 20 et affiche :</p>
+          <ul>
+            <li><code>&lt; 10</code> : "Insuffisant"</li>
+            <li><code>10 à 12</code> : "Passable"</li>
+            <li><code>12 à 16</code> : "Bien"</li>
+            <li><code>&gt;= 16</code> : "Excellent"</li>
+          </ul>
+        </div>
 
-      <h3>1. Boucle for</h3>
-      <pre>
-for i in range(1, 6):
-    print(i)
-      </pre>
+        <div class="exercise">
+          <div class="exercise-title">Exercice 2 – Accès au parc</div>
+          <div class="exercise-level"><span class="tag">Débutant</span>and / or.</div>
+          <p>Demande l’âge et si la personne a un billet (oui/non). Règles :</p>
+          <ul>
+            <li>Si âge &lt; 12 : doit être accompagné (affiche un message)</li>
+            <li>Si pas de billet : refuse l’entrée</li>
+            <li>Sinon : autorise l’entrée</li>
+          </ul>
+        </div>
 
-      <h3>2. Boucle while</h3>
-      <pre>
-i = 0
-while i < 5:
-    print(i)
-    i += 1
-      </pre>
+        <h3>6. Corrections</h3>
 
-      <h3>3. Somme de 1 à n</h3>
-      <pre>
-n = int(input("n : "))
-s = 0
-for i in range(1, n+1):
-    s += i
-print(s)
-      </pre>
+        <h4>Correction exercice 1</h4>
+        <pre>note = float(input("Note sur 20 : "))
 
-      <h3>4. Boucles imbriquées</h3>
-      <pre>
-for i in range(3):
-    for j in range(2):
-        print(i, j)
-      </pre>
+if note &lt; 10:
+    print("Insuffisant")
+elif note &lt; 12:
+    print("Passable")
+elif note &lt; 16:
+    print("Bien")
+else:
+    print("Excellent")</pre>
 
-      <h3>5. Exercices (boucles)</h3>
-      <ul>
-        <li>Afficher les nombres de 1 à 100</li>
-        <li>Afficher les multiples de 7</li>
-        <li>Compter les lettres d’un mot</li>
-      </ul>
-    </section>
+        <h4>Correction exercice 2</h4>
+        <pre>age = int(input("Âge : "))
+billet = input("As-tu un billet ? (oui/non) : ")
 
-    <!-- LISTES -->
-    <section id="listes">
-      <h2>Listes & tableaux</h2>
+if billet != "oui":
+    print("Tu ne peux pas entrer sans billet.")
+else:
+    if age &lt; 12:
+        print("Tu peux entrer, mais tu dois être accompagné.")
+    else:
+        print("Tu peux entrer seul.")</pre>
+      </section>
 
-      <h3>1. Créer une liste</h3>
-      <pre>
-notes = [12, 15, 9, 18, 10]
-      </pre>
+      <!-- BOUCLES -->
+      <section id="boucles">
+        <h2>
+          Boucles
+          <span class="chapter-tag">Chapitre 4</span>
+        </h2>
+        <div class="chapter-meta">
+          Objectifs : for, while, range, boucles imbriquées, cas pratiques.
+        </div>
 
-      <h3>2. Parcourir une liste</h3>
-      <pre>
+        <div class="progress"><div class="progress-inner" data-progress="50"></div></div>
+
+        <h3>1. Boucle for avec range()</h3>
+        <pre>for i in range(1, 6):
+    print("i vaut", i)</pre>
+
+        <div class="explain">
+          <code>range(1, 6)</code> génère les nombres 1, 2, 3, 4, 5 (le 6 est exclu).
+        </div>
+
+        <h3>2. Boucle while</h3>
+        <pre>compteur = 0
+while compteur &lt; 5:
+    print("Compteur =", compteur)
+    compteur = compteur + 1</pre>
+
+        <div class="warning">
+          Attention aux boucles infinies : si la condition reste toujours vraie, la boucle ne s’arrête jamais.
+        </div>
+
+        <h3>3. Somme de 1 à n</h3>
+        <pre>n = int(input("Entrez un entier positif : "))
+somme = 0
+
+for i in range(1, n + 1):
+    somme = somme + i
+
+print("Somme de 1 à", n, "=", somme)</pre>
+
+        <h3>4. Exercices</h3>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 1 – Table de multiplication</div>
+          <div class="exercise-level"><span class="tag">Débutant</span>for + range.</div>
+          <p>Demande un nombre et affiche sa table de multiplication de 1 à 10.</p>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 2 – Devine le nombre (version simple)</div>
+          <div class="exercise-level"><span class="tag">Intermédiaire</span>while + conditions.</div>
+          <p>Choisis un nombre secret dans le code. L’utilisateur doit le deviner. Tant qu’il se trompe, tu lui dis :</p>
+          <ul>
+            <li>"Trop grand" si sa proposition est trop grande</li>
+            <li>"Trop petit" si elle est trop petite</li>
+          </ul>
+        </div>
+
+        <h3>5. Corrections</h3>
+
+        <h4>Correction exercice 1</h4>
+        <pre>n = int(input("Nombre : "))
+
+for i in range(1, 11):
+    print(n, "x", i, "=", n * i)</pre>
+
+        <h4>Correction exercice 2</h4>
+        <pre>secret = 17
+trouve = False
+
+while not trouve:
+    proposition = int(input("Devine le nombre : "))
+
+    if proposition == secret:
+        print("Bravo, tu as trouvé !")
+        trouve = True
+    elif proposition &gt; secret:
+        print("Trop grand")
+    else:
+        print("Trop petit")</pre>
+      </section>
+
+      <!-- LISTES -->
+      <section id="listes">
+        <h2>
+          Listes & grilles 2D
+          <span class="chapter-tag">Chapitre 5</span>
+        </h2>
+        <div class="chapter-meta">
+          Objectifs : listes, parcours, index, grilles type bataille navale.
+        </div>
+
+        <div class="progress"><div class="progress-inner" data-progress="60"></div></div>
+
+        <h3>1. Liste simple</h3>
+        <pre>notes = [12, 15, 9, 18, 10]
+
 for n in notes:
-    print(n)
-      </pre>
+    print("Note :", n)</pre>
 
-      <h3>3. Moyenne</h3>
-      <pre>
-m = sum(notes) / len(notes)
-      </pre>
+        <h3>2. Accès par index</h3>
+        <pre>notes = [12, 15, 9, 18, 10]
 
-      <h3>4. Compter les >= 10</h3>
-      <pre>
-c = 0
-for n in notes:
-    if n >= 10:
-        c += 1
-      </pre>
+print(notes[0])   # premier élément
+print(notes[-1])  # dernier élément
 
-      <h3>5. Grille 2D</h3>
-      <pre>
-grille = [
-    [0,1,0],
-    [1,0,1],
-    [0,1,0]
+notes[2] = 11     # modifier un élément
+print(notes)</pre>
+
+        <h3>3. Longueur et parcours avec index</h3>
+        <pre>notes = [12, 15, 9, 18, 10]
+
+for i in range(len(notes)):
+    print("Note", i, "=", notes[i])</pre>
+
+        <h3>4. Grille 2D (type bataille navale)</h3>
+        <pre>grille = [
+    [0, 1, 0, 0],
+    [0, 0, 1, 0],
+    [1, 0, 0, 1],
+    [0, 1, 0, 0]
 ]
-      </pre>
 
-      <h3>6. Compter les 1</h3>
-      <pre>
-total = 0
+for ligne in grille:
+    print(ligne)</pre>
+
+        <h4>Parcours complet de la grille</h4>
+        <pre>for i in range(len(grille)):
+    for j in range(len(grille[i])):
+        print("Case", i, j, "=", grille[i][j])</pre>
+
+        <h3>5. Exercices</h3>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 1 – Moyenne des notes</div>
+          <div class="exercise-level"><span class="tag">Débutant</span>Somme + len().</div>
+          <p>À partir d’une liste de notes, calcule et affiche la moyenne.</p>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 2 – Compter les bateaux</div>
+          <div class="exercise-level"><span class="tag">Intermédiaire</span>Grille 2D.</div>
+          <p>Dans une grille 2D de 0 et 1, compte le nombre de cases contenant 1.</p>
+        </div>
+
+        <h3>6. Corrections</h3>
+
+        <h4>Correction exercice 1</h4>
+        <pre>notes = [12, 15, 9, 18, 10]
+
+somme = 0
+for n in notes:
+    somme += n
+
+moyenne = somme / len(notes)
+print("Moyenne =", moyenne)</pre>
+
+        <h4>Correction exercice 2</h4>
+        <pre>grille = [
+    [0, 1, 0, 0],
+    [0, 0, 1, 0],
+    [1, 0, 0, 1],
+    [0, 1, 0, 0]
+]
+
+bateaux = 0
+
 for ligne in grille:
     for case in ligne:
         if case == 1:
-            total += 1
-      </pre>
+            bateaux += 1
 
-      <h3>7. Exercices (listes)</h3>
-      <ul>
-        <li>Créer une liste de prénoms</li>
-        <li>Afficher les prénoms commençant par “L”</li>
-        <li>Compter les notes supérieures à la moyenne</li>
-      </ul>
-    </section>
+print("Nombre de bateaux :", bateaux)</pre>
+      </section>
 
-    <!-- FONCTIONS -->
-    <section id="fonctions">
-      <h2>Fonctions</h2>
+      <!-- FONCTIONS -->
+      <section id="fonctions">
+        <h2>
+          Fonctions
+          <span class="chapter-tag">Chapitre 6</span>
+        </h2>
+        <div class="chapter-meta">
+          Objectifs : définir, appeler, paramètres, return, réutilisation.
+        </div>
 
-      <h3>1. Définir une fonction</h3>
-      <pre>
-def saluer(prenom):
+        <div class="progress"><div class="progress-inner" data-progress="70"></div></div>
+
+        <h3>1. Définir une fonction</h3>
+        <pre>def saluer(prenom):
     print("Bonjour", prenom)
-      </pre>
 
-      <h3>2. Return</h3>
-      <pre>
-def carre(x):
-    return x * x
-      </pre>
+saluer("Léa")
+saluer("Hugo")</pre>
 
-      <h3>3. Plusieurs paramètres</h3>
-      <pre>
-def addition(a, b):
-    return a + b
-      </pre>
+        <div class="explain">
+          <code>def</code> sert à définir une fonction. <code>prenom</code> est un paramètre : une variable locale à la fonction.
+        </div>
 
-      <h3>4. Fonction est_pair</h3>
-      <pre>
-def est_pair(n):
-    return n % 2 == 0
-      </pre>
+        <h3>2. Fonction qui renvoie une valeur</h3>
+        <pre>def est_pair(n):
+    if n % 2 == 0:
+        return True
+    else:
+        return False
 
-      <h3>5. Exercices (fonctions)</h3>
-      <ul>
-        <li>Créer une fonction qui renvoie le cube</li>
-        <li>Créer une fonction qui renvoie la moyenne d’une liste</li>
-        <li>Créer une fonction qui renvoie le maximum d’une liste</li>
-      </ul>
-    </section>
+print(est_pair(4))  # True
+print(est_pair(7))  # False</pre>
 
-    <!-- MODULES -->
-    <section id="modules">
-      <h2>Modules</h2>
+        <h4>Version simplifiée</h4>
+        <pre>def est_pair(n):
+    return n % 2 == 0</pre>
 
-      <h3>1. Module math</h3>
-      <pre>
-import math
-print(math.sqrt(2))
-print(math.pi)
-      </pre>
+        <h3>3. Paramètres et valeurs par défaut</h3>
+        <pre>def saluer(prenom, message="Bonjour"):
+    print(message, prenom)
 
-      <h3>2. Module random</h3>
-      <pre>
-import random
-print(random.randint(1, 6))
-      </pre>
+saluer("Léa")
+saluer("Hugo", "Salut")</pre>
 
-      <h3>3. Import sélectif</h3>
+        <h3>4. Exercices</h3>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 1 – Aire d’un rectangle</div>
+          <div class="exercise-level"><span class="tag">Débutant</span>Fonction simple.</div>
+          <p>Écris une fonction <code>aire_rectangle(largeur, hauteur)</code> qui renvoie l’aire.</p>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 2 – Maximum de deux nombres</div>
+          <div class="exercise-level"><span class="tag">Débutant</span>Conditions + return.</div>
+          <p>Écris une fonction <code>maximum(a, b)</code> qui renvoie le plus grand des deux.</p>
+        </div>
+
+        <h3>5. Corrections</h3>
+
+        <h4>Correction exercice 1</h4>
+        <pre>def aire_rectangle(largeur, hauteur):
+    return largeur * hauteur
+
+print(aire_rectangle(3, 5))</pre>
+
+        <h4>Correction exercice 2</h4>
+        <pre>def maximum(a, b):
+    if a &gt;= b:
+        return a
+    else:
+        return b
+
+print(maximum(10, 7))
+print(maximum(3, 9))</pre>
+      </section>
+
+      <!-- MODULES -->
+      <section id="modules">
+        <h2>
+          Modules
+          <span class="chapter-tag">Chapitre 7</span>
+        </h2>
+        <div class="chapter-meta">
+          Objectifs : importer des modules, utiliser math, random, organiser le code.
+        </div>
+
+        <div class="progress"><div class="progress-inner" data-progress="78"></div></div>
+
+        <h3>1. Importer un module</h3>
+        <pre>import math
+
+print("Pi =", math.pi)
+print("Racine de 2 =", math.sqrt(2))</pre>
+
+        <h3>2. Module random</h3>
+        <pre>import random
+
+n = random.randint(1, 6)
+print("Résultat du dé :", n)</pre>
+
+        <h3>3. Exercices</h3>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 1 – Dé à 6 faces</div>
+          <div class="exercise-level"><span class="tag">Débutant</span>random.randint.</div>
+          <p>Simule le lancer d’un dé 10 fois et affiche les résultats.</p>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice 2 – Nombre aléatoire à deviner</div>
+          <div class="exercise-level"><span class="tag">Intermédiaire</span>random + while.</div>
+          <p>Génère un nombre aléatoire entre 1 et 100, l’utilisateur doit le deviner.</p>
+        </div>
+
+        <h3>4. Corrections</h3>
+
+        <h4>Correction exercice 1</h4>
+        <pre>import random
+
+for i in range(10):
+    n = random.randint(1, 6)
+    print("Lancer", i + 1, ":", n)</pre>
+
+        <h4>Correction exercice 2</h4>
+        <pre>import random
+
+secret = random.randint(1, 100)
+trouve = False
+
+while not trouve:
+    proposition = int(input("Devine le nombre (1-100) : "))
+
+    if proposition == secret:
+        print("Bravo, tu as trouvé !")
+        trouve = True
+    elif proposition &gt; secret:
+        print("Trop grand")
+    else:
+        print("Trop petit")</pre>
+      </section>
+
+      <!-- FICHIERS & ERREURS -->
+      <section id="fichiers">
+        <h2>
+          Fichiers & gestion des erreurs
+          <span class="chapter-tag">Chapitre 8</span>
+        </h2>
+        <div class="chapter-meta">
+          Objectifs : lire/écrire des fichiers, try/except, éviter les crashs.
+        </div>
+
+        <div class="progress"><div class="progress-inner" data-progress="86"></div></div>
+
+        <h3>1. Écrire dans un fichier</h3>
+        <pre>with open("notes.txt", "w", encoding="utf-8") as f:
+    f.write("12\n")
+    f.write("15\n")
+    f.write("9\n")</pre>
+
+        <h3>2. Lire un fichier</h3>
+        <pre>with open("notes.txt", "r", encoding="utf-8") as f:
+    contenu = f.read()
+
+print(contenu)</pre>
+
+        <h3>3. Gestion des erreurs avec try/except</h3>
+        <pre>texte = input("Entrez un entier : ")
+
+try:
+    n = int(texte)
+    print("n + 10 =", n + 10)
+except ValueError:
+    print("Ce n'est pas un entier valide.")</pre>
+
+        <h3>4. Exercice</h3>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice – Moyenne depuis un fichier</div>
+          <div class="exercise-level"><span class="tag">Intermédiaire</span>Fichiers + boucles.</div>
+          <p>
+            Un fichier <code>notes.txt</code> contient une note par ligne. Lis le fichier, convertis chaque ligne en nombre,
+            calcule la moyenne et affiche-la. Ignore les lignes vides.
+          </p>
+        </div>
+
+        <h3>5. Correction</h3>
+        <pre>somme = 0
+compte = 0
+
+with open("notes.txt", "r", encoding="utf-8") as f:
+    for ligne in f:
+        ligne = ligne.strip()
+        if ligne != "":
+            try:
+                note = float(ligne)
+                somme += note
+                compte += 1
+            except ValueError:
+                print("Ligne ignorée :", ligne)
+
+if compte &gt; 0:
+    print("Moyenne =", somme / compte)
+else:
+    print("Aucune note valide.")</pre>
+      </section>
+
+      <!-- OBJETS -->
+      <section id="objets">
+        <h2>
+          Introduction aux objets
+          <span class="chapter-tag">Chapitre 9</span>
+        </h2>
+        <div class="chapter-meta">
+          Objectifs : comprendre l’idée de classe, objet, attribut, méthode.
+        </div>
+
+        <div class="progress"><div class="progress-inner" data-progress="93"></div></div>
+
+        <h3>1. Classe simple</h3>
+        <pre>class Joueur:
+    def __init__(self, nom, vie):
+        self.nom = nom
+        self.vie = vie
+
+    def afficher(self):
+        print(self.nom, "a", self.vie, "points de vie.")
+
+j1 = Joueur("Léa", 100)
+j2 = Joueur("Hugo", 80)
+
+j1.afficher()
+j2.afficher()</pre>
+
+        <div class="explain">
+          Une classe est un modèle. Un objet est une "instance" de cette classe. <code>self</code> représente l’objet lui-même.
+        </div>
+
+        <h3>2. Exercice</h3>
+
+        <div class="exercise">
+          <div class="exercise-title">Exercice – Classe Rectangle</div>
+          <div class="exercise-level"><span class="tag">Intermédiaire</span>Objets + méthodes.</div>
+          <p>
+            Crée une classe <code>Rectangle</code> avec largeur et hauteur, une méthode pour calculer l’aire,
+            et une méthode pour l’afficher.
+          </p>
+        </div>
+
+        <h3>3. Correction</h3>
+        <pre>class Rectangle:
+    def __init__(self, largeur, hauteur):
+        self.largeur = largeur
+        self.hauteur = hauteur
+
+    def aire(self):
+        return self.largeur * self.hauteur
+
+    def afficher(self):
+        print("Rectangle", self.largeur, "x", self.hauteur,
+              "- aire =", self.aire())
+
+r = Rectangle(3, 5)
+r.afficher()</pre>
+      </section>
+
+      <!-- PROJETS -->
+      <section id="projets">
+        <h2>
+          Mini‑projets
+          <span class="chapter-tag">Chapitre 10</span>
+        </h2>
+        <div class="chapter-meta">
+          Objectifs : assembler plusieurs notions dans des programmes complets.
+        </div>
+
+        <div class="progress"><div class="progress-inner" data-progress="100"></div></div>
+
+        <h3>Projet 1 – Analyseur de nombre</h3>
+        <pre>n = int(input("Entrez un entier : "))
+
+if n &gt; 0:
+    signe = "positif"
+elif n &lt; 0:
+    signe = "négatif"
+else:
+    signe = "nul"
+
+if n % 2 == 0:
+    parite = "pair"
+else:
+    parite = "impair"
+
+print("Le nombre est", signe, "et", parite)</pre>
+
+        <h3>Projet 2 – Compteur de bateaux dans une grille</h3>
+        <pre>grille = [
+    [0, 1, 0, 0],
+    [0, 0, 1, 0],
+    [1, 0, 0, 1],
+    [0, 1, 0, 0]
+]
+
+bateaux = 0
+
+for ligne in grille:
+    for case in ligne:
+        if case == 1:
+            bateaux += 1
+
+print("Nombre de bateaux :", bateaux)</pre>
+
+        <h3>Projet 3 – Petit quiz</h3>
+        <pre>score = 0
+
+print("Question 1 : Combien font 3 + 4 ?")
+rep = input("Réponse : ")
+if rep == "7":
+    print("Bonne réponse !")
+    score += 1
+else:
+    print("Mauvaise réponse.")
+
+print("Question 2 : Python est-il un langage compilé ? (oui/non)")
+rep = input("Réponse : ")
+if rep.lower() == "non":
+    print("Bonne réponse !")
+    score += 1
+else:
+    print("Mauvaise réponse.")
+
+print("Score final :", score, "/ 2")</pre>
+
+        <h3>Projet 4 – Gestion simple de notes</h3>
+        <pre>notes = []
+
+while True:
+    texte = input("Entrez une note (ou 'fin') : ")
+    if texte == "fin":
+        break
+    try:
+        note = float(texte)
+        notes.append(note)
+    except ValueError:
+        print("Note invalide, réessaie.")
+
+if len(notes) == 0:
+    print("Aucune note.")
+else:
+    somme = 0
+    for n in notes:
+        somme += n
+    moyenne = somme / len(notes)
+    print("Notes :", notes)
+    print("Moyenne :", moyenne)</pre>
+      </section>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Progression du cours</h3>
+        <p>Chaque chapitre a une barre de progression indicative :</p>
+        <ul>
+          <li><span class="badge">10%</span>Accueil</li>
+          <li><span class="badge">20%</span>Bases</li>
+          <li><span class="badge">30%</span>Types & chaînes</li>
+          <li><span class="badge">40%</span>Conditions</li>
+          <li><span class="badge">50%</span>Boucles</li>
+          <li><span class="badge">60%</span>Listes & 2D</li>
+          <li><span class="badge">70%</span>Fonctions</li>
+          <li><span class="badge">78%</span>Modules</li>
+          <li><span class="badge">86%</span>Fichiers & erreurs</li>
+          <li><span class="badge">93%</span>Objets</li>
+          <li><span class="badge">100%</span>Projets</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="mini-title">Compétences couvertes</div>
+        <div class="pill-list">
+          <span class="pill">Syntaxe de base</span>
+          <span class="pill">Variables</span>
+          <span class="pill">Types</span>
+          <span class="pill">Conditions</span>
+          <span class="pill">Boucles</span>
+          <span class="pill">Listes</span>
+          <span class="pill">Fonctions</span>
+          <span class="pill">Modules</span>
+          <span class="pill">Fichiers</span>
+          <span class="pill">Erreurs</span>
+          <span class="pill">Objets</span>
+          <span class="pill">Projets</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="mini-title">Conseils d’apprentissage</div>
+        <ul>
+          <li>Recopie le code au lieu de le copier-coller.</li>
+          <li>Modifie les exemples pour voir ce qui change.</li>
+          <li>Explique ton code à voix haute comme si tu l’enseignais.</li>
+          <li>Reviens sur les chapitres difficiles plusieurs fois.</li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    Académie Python – Cours complet en un seul fichier HTML.
+  </footer>
+
+  <!-- SCRIPT NAVIGATION -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll("[data-target]");
+    const sections = document.querySelectorAll("main section");
+    const progressBars = document.querySelectorAll(".progress-inner");
+
+    function showSection(id) {
+      sections.forEach(sec => {
+        sec.classList.toggle("active", sec.id === id);
+      });
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.target;
+
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        showSection(target);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+
+    progressBars.forEach(bar => {
+      const value = bar.getAttribute("data-progress");
+      if (value) {
+        bar.style.width = value + "%";
+      }
+    });
+
+    const hasActive = Array.from(sections).some(sec => sec.classList.contains("active"));
+    if (!hasActive && sections[0]) {
+      sections[0].classList.add("active");
+    }
+  });
+  </script>
+</body>
+</html>
+
